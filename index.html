@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Eaglercraft</title>
+
+<style>
+:root{
+--bg:#ffffff;
+--card:#f3f4f6;
+--border:#d1d5db;
+--text:#111827;
+--sub:#6b7280;
+--hover:#e5e7eb;
+}
+
+body.dark{
+--bg:#0f1115;
+--card:#171b22;
+--border:#2a2f38;
+--text:#ffffff;
+--sub:#8a94a6;
+--hover:#1f2633;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+padding:30px;
+transition:.25s;
+}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.title{
+font-size:42px;
+font-weight:700;
+}
+
+.toggle{
+border:none;
+background:var(--card);
+border:1px solid var(--border);
+color:var(--text);
+padding:12px 18px;
+border-radius:16px;
+cursor:pointer;
+font-size:15px;
+transition:.2s;
+}
+
+.toggle:hover{
+background:var(--hover);
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+gap:18px;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:22px;
+padding:20px;
+text-decoration:none;
+color:var(--text);
+transition:.25s;
+display:block;
+}
+
+.card:hover{
+transform:translateY(-5px);
+background:var(--hover);
+}
+
+.icon{
+width:52px;
+height:52px;
+margin-bottom:15px;
+color:var(--text);
+}
+
+.name{
+font-size:18px;
+font-weight:600;
+word-break:break-word;
+}
+
+.ext{
+margin-top:7px;
+color:var(--sub);
+font-size:14px;
+}
+</style>
+</head>
+
+<body class="dark">
+
+<div class="topbar">
+<div class="title">All Files</div>
+
+<button class="toggle" onclick="toggleTheme()">
+☾ / ☼
+</button>
+</div>
+
+<div class="grid"></div>
+
+<script>
+function toggleTheme(){
+
+document.body.classList.toggle("dark")
+
+localStorage.theme=
+document.body.classList.contains("dark")
+? "dark"
+: "light"
+
+}
+
+if(localStorage.theme==="light"){
+document.body.classList.remove("dark")
+}
+
+fetch("/Game/files.js")
+.then(r=>r.json())
+.then(files=>{
+
+const grid=document.querySelector(".grid")
+
+files.forEach(item=>{
+
+let displayName=item.name
+let type="File"
+let icon=""
+let href=item.name
+
+if(item.type==="folder"){
+
+type="Folder"
+
+icon=`
+<svg class="icon"
+xmlns="http://www.w3.org/2000/svg"
+viewBox="0 0 24 24">
+
+<path d="M0 0h24v24H0z"
+fill="none"/>
+
+<path
+fill="currentColor"
+stroke="currentColor"
+stroke-linecap="round"
+stroke-linejoin="round"
+stroke-width="2"
+
+d="M3 6a2 2 0 0 1 2-2h3.93a2 2 0 0 1 1.664.89l.812 1.22A2 2 0 0 0 13.07 7H19a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+</svg>
+`
+
+href=item.name+"/"
+
+}else if(item.name.endsWith(".html")){
+
+displayName=item.name.replace(".html","")
+type="Game"
+
+icon=`
+<svg class="icon"
+xmlns="http://www.w3.org/2000/svg"
+viewBox="0 0 512 512">
+
+<path d="M0 0h512v512H0z"
+fill="none"/>
+
+<path
+fill="currentColor"
+
+d="M483.13 245.38C461.92 149.49 430 98.31 382.65 84.33A107.1 107.1 0 0 0 352 80c-13.71 0-25.65 3.34-38.28 6.88C298.5 91.15 281.21 96 256 96s-42.51-4.84-57.76-9.11C185.6 83.34 173.67 80 160 80a115.7 115.7 0 0 0-31.73 4.32c-47.1 13.92-79 65.08-100.52 161C4.61 348.54 16 413.71 59.69 428.83a56.6 56.6 0 0 0 18.64 3.22c29.93 0 53.93-24.93 70.33-45.34c18.53-23.1 40.22-34.82 107.34-34.82c59.95 0 84.76 8.13 106.19 34.82c13.47 16.78 26.2 28.52 38.9 35.91c16.89 9.82 33.77 12 50.16 6.37c25.82-8.81 40.62-32.1 44-69.24c2.57-28.48-1.39-65.89-12.12-114.37M208 240h-32v32a16 16 0 0 1-32 0v-32h-32a16 16 0 0 1 0-32h32v-32a16 16 0 0 1 32 0v32h32a16 16 0 0 1 0 32m84 4a20 20 0 1 1 20-20a20 20 0 0 1-20 20m44 44a20 20 0 1 1 20-19.95A20 20 0 0 1 336 288m0-88a20 20 0 1 1 20-20a20 20 0 0 1-20 20m44 44a20 20 0 1 1 20-20a20 20 0 0 1-20 20"/>
+</svg>
+`
+
+}else{
+
+icon=`
+<svg class="icon"
+viewBox="0 0 24 24"
+fill="none">
+
+<path
+d="M7 3H14L19 8V21H7V3Z"
+fill="currentColor"/>
+
+<path
+d="M14 3V8H19"
+stroke="var(--bg)"
+stroke-width="1.5"/>
+
+</svg>
+`
+}
+
+grid.innerHTML += `
+<a class="card" href="${href}" target="_blank">
+
+${icon}
+
+<div class="name">${displayName}</div>
+
+<div class="ext">${type}</div>
+
+</a>
+`
+
+})
+
+})
+</script>
+
+</body>
+</html>
