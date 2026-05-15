@@ -126,7 +126,7 @@
 
 
   let originalHTML = "";
-  fetch("https://eaglercraft-game-offline.vercel.app/1.2.5/index.md").then(r => r.text()).then(md => {
+  fetch("https://eaglercraft-game-offline.vercel.app/Games/1.2.5/index.md").then(r => r.text()).then(md => {
     originalHTML = marked.parse(md);
     document.getElementById("content").innerHTML = originalHTML;
   });
