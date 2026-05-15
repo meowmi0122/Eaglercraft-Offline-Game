@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Eaglercraft Offline．1.2.5</title>
+<title>Eaglercraft Offline．1.5.2</title>
 <link rel="icon" type="image/png" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="manifest" href="manifest.json">
@@ -334,7 +334,7 @@ color: black;
 <body>
 <header>
 <a href="https://eaglercraft-game-offline.vercel.app/"><img src="https://eaglercraft-game-offline.vercel.app/icon.png"></a>
-<div id="titleText">1.2.5</div>
+<div id="titleText">1.5.2</div>
 <button id="themeBtn"><svg id="icon" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" stroke="currentColor" stroke-width="2"/></svg></button>
 </header>
 <div class="search-container">
@@ -384,7 +384,7 @@ setTheme(localStorage.getItem("theme") || "dark");
 document.getElementById("themeBtn").onclick = () => setTheme(document.body.className === "dark" ? "light" : "dark");
 
 let originalHTML = "";
-fetch("https://eaglercraft-game-offline.vercel.app/Games/1.2.5/index.md").then(r => r.text()).then(md => {
+fetch("https://eaglercraft-game-offline.vercel.app/Games/1.5.2/index.md").then(r => r.text()).then(md => {
 originalHTML = marked.parse(md);
 document.getElementById("content").innerHTML = originalHTML;
 });
