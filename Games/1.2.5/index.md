@@ -5,3 +5,4 @@
 ### <a href="https://eaglercraft-game-offline.vercel.app/Games/1.2.5/Eaglercraft-1.2.5(24w25a)" style="color: inherit; text-decoration: none;">
   Eaglercraft-1.2.5(24w25a)
 </a>
+Mobile:× PC:✓
