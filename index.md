@@ -7,7 +7,7 @@
 </a>
 
 ---
-### <a href="https://eaglercraft-game-offline.vercel.app/Games/1.2.5">
+### <a href="https://eaglercraft-game-offline.vercel.app/Games/1.5.2">
   <img src="SVG/folder.svg" width="100">
 </a>
 
