@@ -380,7 +380,7 @@ setTheme(localStorage.getItem("theme") || "dark");
 document.getElementById("themeBtn").onclick = () => setTheme(document.body.className === "dark" ? "light" : "dark");
 
 let originalHTML = "";
-fetch("https://eaglercraft-game-offline.vercel.app/Games/1.2.5index.md").then(r => r.text()).then(md => {
+fetch("https://eaglercraft-game-offline.vercel.app/Games/1.2.5/index.md").then(r => r.text()).then(md => {
 originalHTML = marked.parse(md);
 document.getElementById("content").innerHTML = originalHTML;
 });
